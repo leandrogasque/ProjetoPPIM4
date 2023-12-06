@@ -412,8 +412,9 @@ resposta.end(`
           <a class="btn btn-primary col-5" href="/cadastro.html">Cadastro</a>
         </div>
       </div>
-      <p> Seu ultimo acesso foi em ${dataUltimoAcesso}</p>
+      
   </main>
+  <p> Seu ultimo acesso foi em ${dataUltimoAcesso}</p>
   <footer>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
