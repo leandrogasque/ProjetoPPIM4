@@ -404,17 +404,18 @@ resposta.end(`
   </header>
   <main class="background">
     <div class="container">
-      <div class="row">
+      <div class="col">
         <div class="col-10 text-center">
           <h1> Escolha a Opção desejada</h1>
         </div>
         <div>
           <a class="btn btn-primary col-5" href="/cadastro.html">Cadastro</a>
         </div>
+        <p> Seu ultimo acesso foi em ${dataUltimoAcesso}</p>
       </div>
       
   </main>
-  <p> Seu ultimo acesso foi em ${dataUltimoAcesso}</p>
+  
   <footer>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
