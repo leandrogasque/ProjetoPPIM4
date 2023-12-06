@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
 const porta = 4000;
-const host = '0.0.0.0';
+const host = 'localhost' || '0.0.0.0';
 
 var listaUsuarios = [];
 //extrair os dados do corpo da requisicao, além de validar os dados
