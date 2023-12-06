@@ -412,6 +412,7 @@ resposta.end(`
           <a class="btn btn-primary col-5" href="/cadastro.html">Cadastro</a>
         </div>
       </div>
+      <p> Seu ultimo acesso foi em ${dataUltimoAcesso}</p>
   </main>
   <footer>
   </footer>
@@ -423,7 +424,7 @@ resposta.end(`
     </script>
 </body>
 <footer>
-  <p> Seu ultimo acesso foi em ${dataUltimoAcesso}</p>
+  
 </footer>
 </html>
 `);
