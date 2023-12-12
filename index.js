@@ -3,8 +3,10 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
-const porta = 4000;
-const host = 'localhost' || '0.0.0.0';
+
+
+const porta = 3000;
+const host ='localhost';
 
 var listaUsuarios = [];
 //extrair os dados do corpo da requisicao, além de validar os dados
@@ -352,26 +354,26 @@ conteudoResposta = `
 resposta.end(conteudoResposta);
 }
 }
-//pseudo middleware
 function autenticar(requisicao, resposta, next){
-  if (requisicao.session.usuarioAutenticado){
+  if (requisicao.session.usuaruioAutenticado){
     next();
   }
   else{
-    resposta.redirect('/login.html');
+    resposta.redirect("/login.html");
   }
 }
 const app = express();
 app.use(cookieParser());
-
 app.use(session({
-  secret: 'minhasenha',
+  secret: "minhasenhasecreta",
   resave: true,
   saveUninitialized: true,
   cookie: {
-    maxAge: 1000 * 60 * 15 //15 minutos
+    maxAge: 1000 * 60 * 30 // 30 minutos
   }
 }))
+
+
 // ativar a extensao que manipula requisções http
 //opcao false ativa a extensão query string
 //opcao true ativa a extensão qs (manipula objetos)
@@ -379,13 +381,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(process.cwd(), 'paginas')));
 
-app.get('/', autenticar,  (requisicao, resposta) => {
+app.get('/',autenticar, (requisicao, resposta) => {
+
   const dataUltimoAcesso = requisicao.cookies.DataUltimoAcesso;
   const data = new Date();
-resposta.cookie("DataUltimoAcesso", data.toLocaleString(),{
-  maxAge: 1000 * 60 * 60 * 24 * 30,
-  httpOnly: true,
-});
+  resposta.cookie("DataUltimoAcesso", data.toLocaleString(),{
+    maxAge: 1000 * 60 * 30, // 30 minutos
+    httpOnly: true // para evitar ataques de JavaScript
+  });
 resposta.end(`
 <!doctype html>
 <html lang="pt-br">
@@ -404,18 +407,20 @@ resposta.end(`
   </header>
   <main class="background">
     <div class="container">
-      <div class="col">
+      <div class="row">
         <div class="col-10 text-center">
           <h1> Escolha a Opção desejada</h1>
         </div>
         <div>
           <a class="btn btn-primary col-5" href="/cadastro.html">Cadastro</a>
         </div>
-        <p> Seu ultimo acesso foi em ${dataUltimoAcesso}</p>
+        <br>
+        <br>
+        <p>Seu ultimo acesso foi em... ${dataUltimoAcesso}</p>
       </div>
-      
+    </div>
+
   </main>
-  
   <footer>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -425,42 +430,26 @@ resposta.end(`
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
 </body>
-<footer>
-  
-</footer>
+
 </html>
 `);
 })
-//endpoint login irá processar o login da aplicação
 app.post('/login', (requisicao, resposta) => {
-  const usuario = requisicao.body.usuario;
-  const senha = requisicao.body.senha;
-  if (usuario && senha && (usuario === 'admin') && (senha === '123')){
-    requisicao.session.usuarioAutenticado = true;
+
+  const { usuario, senha } = requisicao.body;
+  if (usuario === 'admin' && senha === '123') {
+    requisicao.session.usuaruioAutenticado = true;
     resposta.redirect('/');
   }
   else {
-    resposta.end(`
-    <!doctype html>
-    <html lang="pt-br">
-     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Faalha na Autenticação</title>
-      </head> 
-      <body>
-        <h1> Usuário ou senha inválidos!</h1>
-        <a href="/login.html">Voltar</a>
-      </body>
-    </html>
+    //mostrar uma mensagem de erro no prompt de login
+    resposta.redirect('/erro.html');
 
-    `)
   }
 });
 //rota para processar o cadastro de usuario endpoint = /cadastro
 
-app.post('/cadastro', autenticar, processarCadastroUsuario);
+app.post('/cadastro',autenticar, processarCadastroUsuario);
 
 
 

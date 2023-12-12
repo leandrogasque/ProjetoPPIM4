@@ -1,7 +1,7 @@
 {
-  "name": "projetoppim4av",
+  "name": "projetoppim3av",
   "version": "1.0.0",
-  "description": "Projeto desenvolvido para a aula ao vivo n 4",
+  "description": "Projeto desenvolvido para a aula ao vivo n 3",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leandrogasque/PPIM4.git"
+    "url": "git+https://github.com/leandrogasque/ProjetoPPIM3AV.git"
   },
   "author": "Leandro Gasque",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/leandrogasque/PPIM4.git/issues"
+    "url": "https://github.com/leandrogasque/ProjetoPPIM3AV/issues"
   },
   "homepage": "https://github.com/leandrogasque/ProjetoPPIM3AV#readme",
   "dependencies": {
