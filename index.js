@@ -409,6 +409,11 @@ resposta.end(`
     <div class="container">
       <div class="row">
         <div class="col-10 text-center">
+         <code>
+              Professor, refiz essa atividade umas 10 vezes e não consegui resolver um bug na validação 
+              do cadastro, na atividade 3 funcionou corretamente, porem nessa atividade 4, ao inserir cookies e sessions 
+              e o login, durante a validação do cadastro, se deixar algum campo em branco. ao validar retorna para a pagina de login.
+         </code>
           <h1> Escolha a Opção desejada</h1>
         </div>
         <div>
